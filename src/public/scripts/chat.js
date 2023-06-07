@@ -1,5 +1,3 @@
-//let baseUrl = "http://localhost:8080";
-let baseUrl = 'https://proyectofinal5-production.up.railway.app';
 let socket = io.connect(baseUrl, {
     'forceNew': true,
     transport: ["polling"]
@@ -22,7 +20,7 @@ const addMessage = () => {
         text: document.getElementById("texto").value
     }
     socket.emit('mensaje', data);
-    fetch(baseUrl + '/api/messages/', {
+    fetch(baseUrl + 'api/messages/', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

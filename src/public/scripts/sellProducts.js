@@ -1,6 +1,6 @@
 const productsTo = () => {
-    getUser();
-    fetch(baseUrl + '/api/products').then(res => {
+    getUrl();
+    fetch(baseUrl + 'api/products').then(res => {
         res.json().then(json => {
             productos = json.data;
             printProductsCart()
@@ -27,7 +27,7 @@ const mapProductsCart = (product) => {
 }
 
 const addProductCart = (productId) => {
-    fetch(baseUrl + '/api/cart-products/' + productId, {
+    fetch(baseUrl + 'api/cart-products/' + productId, {
         method: "POST",
         headers: {
             "Content-Type": 'application/json; charset=UTF-8'

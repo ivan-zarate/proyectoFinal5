@@ -10,7 +10,7 @@ const addUser = async () => {
         avatar: document.getElementById("avatar").value,
     }
     if(data.username &&data.password &&data.name &&data.addres &&data.age &&data.telphone &&data.avatar){
-        await fetch(baseUrl + '/api/signup', {
+        await fetch(baseUrl + 'api/signup', {
             method: "POST",
             headers: {
                 "Content-Type": 'application/json; charset=UTF-8'
@@ -46,7 +46,7 @@ const loginUser = async () => {
         username: document.getElementById("email").value,
         password: document.getElementById("password").value,
     }
-    await fetch(baseUrl + '/api/login', {
+    await fetch(baseUrl + 'api/login', {
         method: "POST",
         headers: {
             "Content-Type": 'application/json; charset=UTF-8'
@@ -72,7 +72,7 @@ const loginUser = async () => {
 }
 
 const createCart = async () => {
-    await fetch(baseUrl + '/api/getCart').then(res => {
+    await fetch(baseUrl + 'api/getCart').then(res => {
         res.json().then(json => {
             if (json) {
                 location.href = "index.html"
@@ -82,15 +82,23 @@ const createCart = async () => {
 }
 
 const getErrors = async () => {
-    await fetch(baseUrl + '/api/errores').then(res => {
+    await fetch(baseUrl + 'api/errores').then(res => {
         res.json().then(json => {
             errors = json.error;
-            printErrors();
+            printErrors(errors);
         })
     })
 }
 
-const printErrors = () => {
+const printErrors = (err) => {
     let error = document.getElementById("error");
-    error.innerHTML = `Por favor ingrese todos los campos`;
+    if(err){
+        error.innerHTML='';
+        error.innerHTML=`${err}`;
+    }
+    else{
+        error.innerHTML='';
+        error.innerHTML = `Por favor ingrese todos los campos`;
+    }
 }
+

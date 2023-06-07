@@ -1,12 +1,20 @@
 //let baseUrl = "http://localhost:8080"
-let baseUrl='https://proyectofinal5-production.up.railway.app' ;
+//let baseUrl='https://proyectofinal5-production.up.railway.app' ;
+let baseUrl=[];
 
 let productos = [];
 let user = [];
 let errors = [];
 
-const getUser = () => {
-    fetch(baseUrl + '/api/getusers').then(res => {
+const getUrl=()=>{
+    fetch('/').then(res=>{
+        getUser(res.url)
+    })
+}
+
+const getUser = (url) => {
+    baseUrl=url
+    fetch(baseUrl + 'api/getusers').then(res => {
         res.json().then(json => {
             user = json;
             printUser(user);
@@ -35,7 +43,7 @@ const printUser = (user) => {
 }
 
 const destroySession = () => {
-    fetch(baseUrl + '/api/logout', { method: "DELETE" }).then(res => {
+    fetch(baseUrl + 'api/logout', { method: "DELETE" }).then(res => {
         user = [];
         location.href = "/";
     })

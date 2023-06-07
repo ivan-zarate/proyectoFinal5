@@ -1,8 +1,8 @@
 const getProducts = () => {
-    fetch(baseUrl + '/api/products').then(res => {
+    fetch(baseUrl + 'api/products').then(res => {
         res.json().then(json => {
             productos = json.data;
-            getUser();
+            getUrl();
             printProducts();
         })
     })
@@ -28,7 +28,7 @@ const mapProducts = (product) => {
 }
 
 const deleteProduct = (productId) => {
-    fetch(baseUrl + '/api/products/' + productId, { method: "DELETE" }).then(res => {
+    fetch(baseUrl + 'api/products/' + productId, { method: "DELETE" }).then(res => {
         getProducts();
     })
 }
@@ -42,7 +42,7 @@ const addProduct = () => {
         price: document.getElementById("price").value,
         stock: document.getElementById("stock").value,
     }
-    fetch(baseUrl + '/api/products', {
+    fetch(baseUrl + 'api/products', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -76,7 +76,7 @@ const actualizeProduct = () => {
         stock: document.getElementById("stock").value,
         id: document.getElementById("productId").value
     }
-    fetch(baseUrl + '/api/products/' + data.id, {
+    fetch(baseUrl + 'api/products/' + data.id, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {

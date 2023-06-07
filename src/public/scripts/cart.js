@@ -1,6 +1,6 @@
 const productsInCart = () => {
-    getUser();
-    fetch(baseUrl + '/api/cart-products/:_id').then(res => {
+    getUrl();
+    fetch(baseUrl + 'api/cart-products/:_id').then(res => {
         res.json().then(json => {
             let container = document.getElementById('noUser');
             if (json.empty) {
@@ -61,7 +61,7 @@ const mapCartProducts = (product) => {
 }
 
 const editAmount = (productId, query) => {
-    fetch(baseUrl + '/api/cart-products/' + productId + '?query=' + query, {
+    fetch(baseUrl + 'api/cart-products/' + productId + '?query=' + query, {
         method: "PUT",
         headers: {
             "Content-Type": 'application/json; charset=UTF-8'
@@ -75,7 +75,7 @@ const editAmount = (productId, query) => {
     })
 }
 const deleteItem = (productId) => {
-    fetch(baseUrl + '/api/cart-products/' + productId, {
+    fetch(baseUrl + 'api/cart-products/' + productId, {
         method: "DELETE",
         headers: {
             "Content-Type": 'application/json; charset=UTF-8'
@@ -112,7 +112,7 @@ finalizarCompra = (id) => {
         finalizar.innerHTML = `Para continuar con la compra primero debe <a href="signup.html">registrarse</a> o <a href="login.html">iniciar sesion</a>`
     }
     else {
-        fetch(baseUrl + '/api/sells/' + id, {
+        fetch(baseUrl + 'api/sells/' + id, {
             method: "POST",
             headers: {
                 "Content-Type": 'application/json; charset=UTF-8'
