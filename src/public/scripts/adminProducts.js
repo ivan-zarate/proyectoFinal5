@@ -49,6 +49,7 @@ const addProduct = () => {
             "Content-Type": 'application/json; charset=UTF-8'
         }
     }).then(res => {
+        clearScreen();
         getProducts();
     })
 }
@@ -82,6 +83,11 @@ const actualizeProduct = () => {
             "Content-Type": 'application/json; charset=UTF-8'
         }
     }).then(res => {
+        clearScreen();
         getProducts();
     })
+}
+
+const clearScreen=()=>{
+    location.reload()
 }
