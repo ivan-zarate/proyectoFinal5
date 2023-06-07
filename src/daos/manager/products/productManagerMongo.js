@@ -37,9 +37,8 @@ class ProductManagerMongo {
     }
     async delete(id) {
         try {
-            //const deletedProduct = await this.model.deleteOne(id);
-            //return deletedProduct;
-            return "pasa";
+            const deletedProduct = await this.model.deleteOne(id);
+            return deletedProduct;
         } catch (error) {
             throw new Error("No se pudo eliminar el producto");
         }
