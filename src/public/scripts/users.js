@@ -9,29 +9,35 @@ const addUser = async () => {
         telphone: document.getElementById("telphone").value,
         avatar: document.getElementById("avatar").value,
     }
-    await fetch(baseUrl + '/api/signup', {
-        method: "POST",
-        headers: {
-            "Content-Type": 'application/json; charset=UTF-8'
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-    })
-        .then(res => {
-            if (res.url == "http://localhost:8080/errores") {
-                getErrors();
-            }
-            else {
-                res.json().then(json => {
-                    if (json) {
-                        createCart();
-                    }
-                })
-            }
+    if(data.username &&data.password &&data.name &&data.addres &&data.age &&data.telphone &&data.avatar){
+        await fetch(baseUrl + '/api/signup', {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json; charset=UTF-8'
+            },
+            credentials: "include",
+            body: JSON.stringify(data),
         })
-        .catch(err => {
-            return({error:err})
-        })
+            .then(res => {
+                if (res.url == "http://localhost:8080/errores") {
+                    getErrors();
+                }
+                else {
+                    res.json().then(json => {
+                        if (json) {
+                            console.log("json", json);
+                            createCart();
+                        }
+                    })
+                }
+            })
+            .catch(err => {
+                return({error:err})
+            })
+    }
+    else{
+        printErrors()
+    }
 }
 
 const loginUser = async () => {
@@ -86,5 +92,5 @@ const getErrors = async () => {
 
 const printErrors = () => {
     let error = document.getElementById("error");
-    error.innerHTML = `${errors}`;
+    error.innerHTML = `Por favor ingrese todos los campos`;
 }

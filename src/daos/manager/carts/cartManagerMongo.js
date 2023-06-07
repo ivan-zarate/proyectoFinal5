@@ -106,22 +106,25 @@ class CartManagerMongo {
                     }
                 }
                 else if (productToFind && query === "del") {
-                    const updatedProduct = {
-                        ...productToFind,
-                        amount: productToFind.amount - 1,
-                        stock: productToFind.stock + 1
-                    }
-                    if (updatedProduct.stock >= 0) {
-                        newCart.push(updatedProduct);
-                        await this.model.findByIdAndUpdate(result._id,
-                            { products: newCart },
-                            { new: true }
-                        ).then((product) => {
-                            return (`Se actualizo la cantidad en ${product.amount} del producto ${product.name}`)
-                        })
-                    }
-                    else {
-                        return ("Ocurrio un error al intentar actualizar el producto en el carrito")
+                    if (productToFind.amount <= 1) {
+                    } else {
+                        const updatedProduct = {
+                            ...productToFind,
+                            amount: productToFind.amount - 1,
+                            stock: productToFind.stock + 1
+                        }
+                        if (updatedProduct.stock >= 0) {
+                            newCart.push(updatedProduct);
+                            await this.model.findByIdAndUpdate(result._id,
+                                { products: newCart },
+                                { new: true }
+                            ).then((product) => {
+                                return (`Se actualizo la cantidad en ${product.amount} del producto ${product.name}`)
+                            })
+                        }
+                        else {
+                            return ("Ocurrio un error al intentar actualizar el producto en el carrito")
+                        }
                     }
                 }
             }

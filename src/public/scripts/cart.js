@@ -10,7 +10,6 @@ const productsInCart = () => {
             }
             else {
                 if (json.status === "error") {
-
                     createCart()
                 }
                 if (json.message) {
@@ -82,9 +81,19 @@ const deleteItem = (productId) => {
             "Content-Type": 'application/json; charset=UTF-8'
         }
     }).then(res => {
+        cleanCart();
         productsInCart();
         productStock();
     })
+}
+
+const cleanCart=()=>{
+    let container = document.getElementById('cartProducts');
+    container.innerHTML = "";
+    let titleContainer = document.getElementById('titulos');
+    titleContainer.innerHTML = "";
+    let containerPago = document.getElementById('totalAPagar');
+    containerPago.innerHTML = "";
 }
 
 const totalAPagar = (id) => {
