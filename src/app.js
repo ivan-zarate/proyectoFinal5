@@ -37,7 +37,6 @@ else {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static(path.join(__dirname, '/public')));
     app.use(express.static(path.join(__dirname, '/views')));
-    //app.use(express.static(path.join(__dirname, '/public/scripts')));
 
     //Configuracion CORS para visualizar html correctamente
     const whiteList = ['http://localhost:8080', 'http://localhost:8080/api/login', 'http://127.0.0.1:5500', 'https://proyectofinal5-production.up.railway.app', '*']
@@ -60,11 +59,6 @@ else {
         secret: options.CLAVE_SECRETA,
         resave: false,
         saveUninitialized: true,
-        
-        // cookie: {
-        //     sameSite: "none",
-        //     secure: true
-        // }
     }))
 
     //configurar passport
@@ -77,8 +71,7 @@ else {
     app.use('/api', chatInMongo);
     app.use('/api', sessionsMongo);
     app.use('/api', sellsRoutes);
-    //   app.use('/api', processRoutes);
-
+    
     //Configuracion para crear mensajes
     const mensajes = [];
 
@@ -100,9 +93,5 @@ else {
         res.sendFile(__dirname + '/public/index.html')
     });
     
-    app.get("*", async (req, res) => {
-        logger.warn("No existe la pagina solicitada")
-        res.sendFile(__dirname + '/public/index.html')
-    });
 }
 module.exports={app} 

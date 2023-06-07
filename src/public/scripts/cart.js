@@ -9,6 +9,10 @@ const productsInCart = () => {
                                         <h5>!Muchas gracias por visitarnos!</h5>`
             }
             else {
+                if(json.status==="error"){
+                    
+                    createCart()
+                }
                 if (json.message) {
                     container.innerHTML = `${json.message}`;
                 }

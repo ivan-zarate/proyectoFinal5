@@ -1,8 +1,8 @@
 const { cartsMongo } = require("../../dbModels/cart.model");
 const { productsMongo } = require("../../dbModels/product.model");
-const { usersMongo } = require("../../dbModels/user.model")
 const { transporter, adminEmail } = require("../../../nodemailer/gmail");
 const { twilioWapp, adminWapp, twilioClient } = require("../../../twilio/twilio.js");
+const logger = require("../../../logger");
 
 class SellManagerMongo {
     constructor(model) {
@@ -16,9 +16,9 @@ class SellManagerMongo {
             let updatedStockProduct = [];
             if (cart) {
                 const products = await productsMongo.find();
-                // if(!products){
-                //     return "Ocurrio un error al buscar los productos"
-                // }
+                if(!products){
+                    return "Ocurrio un error al buscar los productos"
+                }
                 const productsInCart = cart.products;
                 productsInCart.forEach((producto) => {
                     const check = products.find((prod) => JSON.stringify(prod._id) === JSON.stringify(producto._id));
@@ -64,6 +64,7 @@ class SellManagerMongo {
                     newSell.save();
                     await cartsMongo.findByIdAndUpdate(cart._id, { alive: false })
                     if (newSell) {
+                        console.log("Entra al if?");
                         const emailTemplate = `<div>
                             <h1>Nuevo orden compra ${newSell._id}</h1>
                             <section>${JSON.stringify(productsInCart)}</section>
@@ -75,12 +76,21 @@ class SellManagerMongo {
                             subject: `Nuevo pedido de ${data.name} mail: ${data.username}`,
                             html: emailTemplate
                         };
-                        await twilioClient.messages.create({
-                            from: twilioWapp,
-                            to: adminWapp,
-                            body: `Nuevo pedido de ${data.name} mail: ${data.username}`
-                        });
-                        await transporter.sendMail(mailOptions);
+                        const mail = await transporter.sendMail(mailOptions);
+                        if (!mail) {
+                            logger.error("No se pudo enviar mail")
+                            return newSell
+                        }
+                        try {
+                            await twilioClient.messages.create({
+                                from: twilioWapp,
+                                to: adminWapp,
+                                body: `Nuevo pedido de ${data.name} mail: ${data.username}`
+                            });
+                        } catch (error) {
+                            logger.error("No se pudo enviar mensaje, chequer token y que este activo el wathsapp")
+                            return newSell;
+                        }
                         return newSell;
                     }
                 }
