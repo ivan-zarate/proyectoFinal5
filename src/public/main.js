@@ -1,5 +1,5 @@
 //let baseUrl = "http://localhost:8080";
-let baseUrl='proyectofinal5-production.up.railway.app' ;
+let baseUrl='https://proyectofinal5-production.up.railway.app/' ;
 
 let productos = [];
 let user = [];

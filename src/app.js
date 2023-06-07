@@ -40,7 +40,7 @@ else {
     //app.use(express.static(path.join(__dirname, '/public/scripts')));
 
     //Configuracion CORS para visualizar html correctamente
-    const whiteList = ['http://localhost:8080', 'http://localhost:8080/api/login', 'http://127.0.0.1:5500', 'https://proyecto-capas-production.up.railway.app/api/products', '*']
+    const whiteList = ['http://localhost:8080', 'http://localhost:8080/api/login', 'http://127.0.0.1:5500', 'https://proyectofinal5-production.up.railway.app/', '*']
 
     app.use(
         cors({
