@@ -75,17 +75,12 @@ class SellManagerMongo {
                             subject: `Nuevo pedido de ${data.name} mail: ${data.username}`,
                             html: emailTemplate
                         };
-                        console.log("mailOptions",mailOptions);
-                        console.log("twilioClient",twilioClient);
-                        console.log("twilioWapp",twilioWapp);
-                        console.log("adminWapp",adminWapp);
-                        // await twilioClient.messages.create({
-                        //     from: twilioWapp,
-                        //     to: adminWapp,
-                        //     body: `Nuevo pedido de ${data.name} mail: ${data.username}`
-                        // });
+                        await twilioClient.messages.create({
+                            from: twilioWapp,
+                            to: adminWapp,
+                            body: `Nuevo pedido de ${data.name} mail: ${data.username}`
+                        });
                         await transporter.sendMail(mailOptions);
-                        
                         return newSell;
                     }
                 }
