@@ -7,7 +7,8 @@ body {
   width: 3em;
   height: 3em;
 }
-.container-fluid ul{
+
+.container-fluid ul {
   flex-direction: row;
 }
 
@@ -49,7 +50,8 @@ body {
   margin-top: .6em;
   margin-bottom: .4em;
 }
-#noUser{
+
+#noUser {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,16 +75,19 @@ body {
 #cartProducts img {
   margin-right: 1.5em;
 }
-.productInCart{
+
+.productInCart {
   height: 5em;
   width: 5em;
 }
-.amount{
+
+.amount {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.amount p{
+
+.amount p {
   margin-top: 1em;
   font-size: 18px;
 }
@@ -154,7 +159,8 @@ body {
   }
 
 }
-#error{
+
+#error {
   background-color: coral;
   color: white;
   font-weight: bolder;

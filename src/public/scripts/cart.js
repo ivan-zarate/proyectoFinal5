@@ -9,8 +9,8 @@ const productsInCart = () => {
                                         <h5>!Muchas gracias por visitarnos!</h5>`
             }
             else {
-                if(json.status==="error"){
-                    
+                if (json.status === "error") {
+
                     createCart()
                 }
                 if (json.message) {
@@ -110,7 +110,7 @@ finalizarCompra = (id) => {
             },
         }).then(res => {
             res.json().then(json => {
-                if(json.data.length>0){
+                if (json.data.length > 0) {
                     productStock(json.data);
                 }
                 console.log(json);
@@ -122,19 +122,19 @@ finalizarCompra = (id) => {
 
 }
 
-productStock=(data)=>{
-    let container=document.getElementById('noStock');
-    if(!data){
-        container.innerHTML='';
+productStock = (data) => {
+    let container = document.getElementById('noStock');
+    if (!data) {
+        container.innerHTML = '';
     }
-    else{
-        container.innerHTML='';
+    else {
+        container.innerHTML = '';
         data.forEach(producto => {
             container.innerHTML += outOfStock(producto);
         })
     }
 }
 
-const outOfStock=(producto)=>{
+const outOfStock = (producto) => {
     return `<p>Ya no contamos con la cantidad ingresada para <strong>${producto.name}, stock actual ${producto.stock}</strong></p> `
 }

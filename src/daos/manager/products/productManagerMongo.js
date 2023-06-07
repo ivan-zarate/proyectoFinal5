@@ -2,7 +2,7 @@ class ProductManagerMongo {
     constructor(model) {
         this.model = model;
     };
-    async getAll(){
+    async getAll() {
         try {
             const products = await this.model.find();
             return products;
@@ -10,7 +10,7 @@ class ProductManagerMongo {
             throw new Error("No se pudo obtener los productos");
         }
     };
-    async getByName(name){
+    async getByName(name) {
         try {
             const product = await this.model.findOne(name);
             return product;
@@ -18,24 +18,24 @@ class ProductManagerMongo {
             throw new Error("No se pudo obtener los productos");
         }
     };
-    async create(product){
+    async create(product) {
         try {
             const newProduct = new this.model(product);
-            const test=newProduct.save();
+            const test = newProduct.save();
             return test;
         } catch (error) {
             throw new Error("No se pudo crear el producto");
         }
     }
-    async modify(id, product){
+    async modify(id, product) {
         try {
-            const modifiedProduct = await this.model.updateOne(id,product);
+            const modifiedProduct = await this.model.updateOne(id, product);
             return modifiedProduct;
         } catch (error) {
             throw new Error("No se pudo modificar el producto");
         }
     }
-    async delete(id){
+    async delete(id) {
         try {
             //const deletedProduct = await this.model.deleteOne(id);
             //return deletedProduct;
@@ -45,6 +45,6 @@ class ProductManagerMongo {
         }
     }
 }
-  
 
-module.exports = {ProductManagerMongo}
+
+module.exports = { ProductManagerMongo }

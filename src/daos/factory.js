@@ -23,8 +23,8 @@ switch (newArgs.persistance) {
         userDao = new UserManagerMongo(usersMongo);
         productDao = new ProductManagerMongo(productsMongo);
         messageDao = new MessageManagerMongo(messagesMongo);
-        cartDao=new CartManagerMongo(cartsMongo);
-        sellDao=new SellManagerMongo(sellsMongo);
+        cartDao = new CartManagerMongo(cartsMongo);
+        sellDao = new SellManagerMongo(sellsMongo);
         break;
     case "sql":
         break;

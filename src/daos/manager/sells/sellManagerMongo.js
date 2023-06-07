@@ -16,10 +16,11 @@ class SellManagerMongo {
             let updatedStockProduct = [];
             if (cart) {
                 const products = await productsMongo.find();
-                if(!products){
+                if (!products) {
                     return "Ocurrio un error al buscar los productos"
                 }
                 const productsInCart = cart.products;
+                //Proceso para verificar stock hasta linea 38
                 productsInCart.forEach((producto) => {
                     const check = products.find((prod) => JSON.stringify(prod._id) === JSON.stringify(producto._id));
                     match.push(check)
@@ -64,7 +65,6 @@ class SellManagerMongo {
                     newSell.save();
                     await cartsMongo.findByIdAndUpdate(cart._id, { alive: false })
                     if (newSell) {
-                        console.log("Entra al if?");
                         const emailTemplate = `<div>
                             <h1>Nuevo orden compra ${newSell._id}</h1>
                             <section>${JSON.stringify(productsInCart)}</section>

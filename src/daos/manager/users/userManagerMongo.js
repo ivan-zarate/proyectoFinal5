@@ -75,41 +75,23 @@ class UserManagerMongo {
     }
     async getCart(user) {
         try {
-            //const user = await this.model.findById(id);
             const userCart = await cartsMongo.find({ username: user.username });
             if (!userCart) {
-                console.log("pasa por no cart?");
                 const newCart = new cartsMongo({ username: user.username });
                 newCart.save();
                 return "Se ha creado un carrito";
             }
             else {
-                const result=userCart.find(cart=>cart.alive===true);
+                const result = userCart.find(cart => cart.alive === true);
                 if (result) {
-                    console.log("como esta?",result.alive);
                     return result
                 }
                 else {
-                    console.log("pasa por no alive?");
                     const newCart = new cartsMongo({ username: user.username });
                     newCart.save();
                     return "Se ha creado un carrito";
                 }
             }
-            // if (userCart) {
-            //     const cartAlive = await cartsMongo.findOne({ alive: true });
-            //     if (!cartAlive) {
-            //         const newCart = new cartsMongo({ username: user.username });
-            //         newCart.save();
-            //         return "Se ha creado un carrito";
-            //     }
-            //     else {
-            //         return cartAlive;
-            //     }
-            // }
-            // else {
-            //     return "No existe el usuario"
-            // }
         } catch (error) {
             throw new Error("No se pudo crear el carrito");
         }

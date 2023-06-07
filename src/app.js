@@ -12,7 +12,7 @@ const cluster = require("cluster");
 const os = require("os");
 const numCors = os.cpus().length;
 const logger = require("./logger.js");
-const path= require('path')
+const path = require('path')
 
 const port = newArgs.port;
 
@@ -21,7 +21,7 @@ const productsInMongo = require("./routes/product.routes.js");
 const cartsInMongo = require("./routes/cart.routes.js");
 const chatInMongo = require("./routes/message.routes.js");
 const sessionsMongo = require("./routes/user.routes.js");
-const sellsRoutes =require("./routes/sell.routes.js");
+const sellsRoutes = require("./routes/sell.routes.js");
 
 if (newArgs.mode === "CLUSTER" && cluster.isPrimary) {
     for (let i = 0; i < numCors; i++) {
@@ -45,7 +45,7 @@ else {
         cors({
             origin: whiteList,
             methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS", "HEAD"],
-            header: ["*","Authorization", "X-API-KEY", "Origin", "X-Requested-With", "Content-Type", "Accept", "Access-Control-Allow-Request-Method", 'Access-Control-Allow-Headers', 'Origin'],
+            header: ["*", "Authorization", "X-API-KEY", "Origin", "X-Requested-With", "Content-Type", "Accept", "Access-Control-Allow-Request-Method", 'Access-Control-Allow-Headers', 'Origin'],
             credentials: true,
         })
     );
@@ -54,7 +54,7 @@ else {
         store: MongoStore.create({
             mongoUrl: options.MONGO_SESSION,
             ttl: 600,
-            autoRemove:"native"
+            autoRemove: "native"
         }),
         secret: options.CLAVE_SECRETA,
         resave: false,
@@ -71,7 +71,7 @@ else {
     app.use('/api', chatInMongo);
     app.use('/api', sessionsMongo);
     app.use('/api', sellsRoutes);
-    
+
     //Configuracion para crear mensajes
     const mensajes = [];
 
@@ -88,10 +88,10 @@ else {
     });
 
     srv.on('error', error => logger.warn(`Error en el servidor ${error}`))
-    
-    app.get("/",(req,res)=>{
+
+    app.get("/", (req, res) => {
         res.sendFile(__dirname + '/public/index.html')
     });
-    
+
 }
-module.exports={app} 
+module.exports = { app } 

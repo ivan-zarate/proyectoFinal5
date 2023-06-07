@@ -9,7 +9,7 @@ const schemaUserOnMongo = new mongoose.Schema(
         age: { type: Number, required: true },
         telphone: { type: String, required: true },
         avatar: { type: String, required: true },
-        admin:{type: Boolean, default:false}
+        admin: { type: Boolean, default: false }
     }, {
     timestamps: true
 });

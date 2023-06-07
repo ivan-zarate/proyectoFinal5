@@ -1,5 +1,5 @@
 const validateUser = (req, res, next) => {
-    console.log("boyd",req.session);
+    console.log("boyd", req.session);
     const admin = true;
     if (admin != false) {
         req.isCorrect = true;

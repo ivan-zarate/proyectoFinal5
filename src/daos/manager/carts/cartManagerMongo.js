@@ -5,31 +5,12 @@ class CartManagerMongo {
     constructor(model) {
         this.model = model;
     };
-    // async createCart(idUser) {
-    //     try {
-    //         const user= await usersMongo.findById(idUser);
-    //         if (user){
-    //             const cartAlive= await this.model.findOne({alive});
-    //             console.log("estado carrito",cartAlive);
-    //         }
-    //         const cart = await this.model.save();
-    //         if (!productsInCart) {
-    //             return ("Carrito no encontrado");
-    //         }
-    //         if (productsInCart.length === 0) {
-    //             return ("Aun no tienes productos en el carrito");
-    //         }
-    //         return productsInCart;
-    //     } catch (error) {
-    //         throw new Error("No se pudo obtener el carrito");
-    //     }
-    // };
     async getCart(id) {
         try {
             const user = await usersMongo.findById(id);
             if (user) {
                 const productsInCart = await this.model.find({ username: user.username });
-                if (productsInCart){
+                if (productsInCart) {
                     const result = productsInCart.find(cart => cart.alive === true);
                     if (result) {
                         if (!result) {
@@ -39,8 +20,8 @@ class CartManagerMongo {
                             return result;
                         }
                     }
-                } 
-                else{
+                }
+                else {
                     return ({ message: "No se pudo obtener el carrito" });
                 }
             }
@@ -112,7 +93,6 @@ class CartManagerMongo {
                         stock: productToFind.stock - 1
                     }
                     if (updatedProduct.stock >= 0) {
-                        console.log("updatedProduct", updatedProduct);
                         newCart.push(updatedProduct);
                         await this.model.findByIdAndUpdate(result._id,
                             { products: newCart },
@@ -164,7 +144,6 @@ class CartManagerMongo {
                 }
                 else {
                     const productToFind = await productsMongo.findOne({ name: productInCart.name });
-                    console.log("productToFind", productToFind);
                     const newCart = arrayCart.filter(prod => (JSON.stringify(prod._id)) != JSON.stringify(productId._id));
                     let { _id, incart } = productToFind;
                     await this.model.findByIdAndUpdate(result._id,

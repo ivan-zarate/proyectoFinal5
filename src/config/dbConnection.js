@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const { options } = require("./options");
-const logger=require("../logger")
-class ConnectDB{
+const logger = require("../logger")
+class ConnectDB {
     static #instance;
-    constructor(){
+    constructor() {
         try {
             mongoose.set("strictQuery", true);
             mongoose.set('debug', true);
@@ -13,8 +13,8 @@ class ConnectDB{
             logger.warn(`An error occurred trying to connect to mongo: ${error}`)
         }
     };
-    static async getInstance(){
-        if(ConnectDB.#instance){
+    static async getInstance() {
+        if (ConnectDB.#instance) {
             logger.info("Base de datos ya conectada");
             return ConnectDB.#instance;
         }

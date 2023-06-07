@@ -17,7 +17,6 @@ const printProducts = () => {
 
 const mapProducts = (product) => {
     return `<div>
-            
             <h5>${product.name}</h5>
             <p>$${product.price}</p>
             <img src="${product.url}" alt="${product.name}">

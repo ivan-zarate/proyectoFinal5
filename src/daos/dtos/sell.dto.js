@@ -1,5 +1,5 @@
-class SellDTO{
-    constructor(sell){
+class SellDTO {
+    constructor(sell) {
         this.username = user.username;
         this.name = user.name;
         this.addres = user.addres;
@@ -8,4 +8,4 @@ class SellDTO{
     }
 }
 
-module.exports = {SellDTO}
+module.exports = { SellDTO }

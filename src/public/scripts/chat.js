@@ -1,5 +1,5 @@
 //let baseUrl = "http://localhost:8080";
-let baseUrl='https://proyectofinal5-production.up.railway.app' ;
+let baseUrl = 'https://proyectofinal5-production.up.railway.app';
 let socket = io.connect(baseUrl, {
     'forceNew': true,
     transport: ["polling"]
@@ -11,13 +11,13 @@ socket.on('mensajes', function (msjs) {
 
 const addMessage = () => {
     const data = {
-        author:{
+        author: {
             id: document.getElementById("email").value,
-            name:document.getElementById("name").value,
-            lastname:document.getElementById("lastname").value,
-            age:document.getElementById("age").value,
-            alias:document.getElementById("alias").value,
-            avatar:document.getElementById("avatar").value,
+            name: document.getElementById("name").value,
+            lastname: document.getElementById("lastname").value,
+            age: document.getElementById("age").value,
+            alias: document.getElementById("alias").value,
+            avatar: document.getElementById("avatar").value,
         },
         text: document.getElementById("texto").value
     }
