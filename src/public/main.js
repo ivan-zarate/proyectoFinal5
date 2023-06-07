@@ -1,0 +1,43 @@
+let baseUrl = "http://localhost:8080";
+//let baseUrl='https://proyecto-capas-production.up.railway.app' ;
+
+let productos = [];
+let user = [];
+let errors = [];
+
+const getUser = () => {
+    fetch(baseUrl + '/api/getusers').then(res => {
+        res.json().then(json => {
+            user = json;
+            printUser(user);
+        })
+    })
+}
+
+const printUser = (user) => {
+    if (user.message) {
+        console.log(user.message);
+        container = document.getElementById('user').style.display = "none";
+    }
+    else {
+        if (user.data.admin) {
+            let adminContainer = document.getElementById('admin');
+            adminContainer.innerHTML = `Admin`
+
+        }
+        let container = document.getElementById('user');
+        container.innerHTML =
+            `<div>
+        <p>¡Hola ${user.data.username}!</p>
+        <button type="button" class="btn btn-danger btn-sm" onclick="destroySession()">LogOut</button>
+        </div>`
+    }
+}
+
+const destroySession = () => {
+    fetch(baseUrl + '/api/logout', { method: "DELETE" }).then(res => {
+        user = [];
+        location.href = "/";
+    })
+}
+
