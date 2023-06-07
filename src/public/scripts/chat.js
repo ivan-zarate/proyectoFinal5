@@ -1,4 +1,5 @@
-let baseUrl = "http://localhost:8080";
+//let baseUrl = "http://localhost:8080";
+let baseUrl='https://proyectofinal5-production.up.railway.app' ;
 let socket = io.connect(baseUrl, {
     'forceNew': true,
     transport: ["polling"]
