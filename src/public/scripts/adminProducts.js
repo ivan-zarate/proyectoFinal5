@@ -29,6 +29,7 @@ const mapProducts = (product) => {
 
 const deleteProduct = (productId) => {
     fetch(baseUrl + 'api/products/' + productId, { method: "DELETE" }).then(res => {
+        clearScreen();
         getProducts();
     })
 }
