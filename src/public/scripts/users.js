@@ -55,7 +55,7 @@ const loginUser = async () => {
         body: JSON.stringify(data),
     })
         .then(res => {
-            if (res.url == "http://localhost:8080/errores") {
+            if (res.url == "http://localhost:8080/errores" || res.url=='https://proyectofinal5-production.up.railway.app') {
                 getErrors();
             }
             else {
