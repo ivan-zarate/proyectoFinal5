@@ -7,7 +7,7 @@
     "test": "mocha src/test/test.js --timeout 20000 --exit",
     "start-forever-fork": "forever start src/app.js -p 8080",
     "start-forever-cluster": "forever start src/app.js -m CLUSTER -p 8081",
-    "start-production": "SET NODE_ENV=Production& nodemon src/app.js",
+    "start": "SET NODE_ENV=Production& nodemon src/app.js",
     "start-dev": "SET NODE_ENV=dev& nodemon src/app.js",
     "start-cluster": "nodemon src/app.js -m CLUSTER"
   },
